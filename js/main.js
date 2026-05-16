@@ -27,6 +27,31 @@
             $('.back-to-top').fadeOut('slow');
         }
     });
+
+    // Keep navbar visible while scrolling down
+    $(document).ready(function () {
+        var $navbar = $('.navbar-modern.sticky-top');
+
+        if (!$navbar.length) {
+            return;
+        }
+
+        var thresholdTop = $navbar.offset().top;
+
+        function updateStickyNavbar() {
+            if ($(window).scrollTop() > thresholdTop) {
+                $navbar.addClass('is-fixed');
+                $('body').addClass('has-fixed-navbar');
+            } else {
+                $navbar.removeClass('is-fixed');
+                $('body').removeClass('has-fixed-navbar');
+            }
+        }
+
+        updateStickyNavbar();
+        $(window).on('scroll resize', updateStickyNavbar);
+    });
+
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
