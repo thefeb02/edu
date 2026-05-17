@@ -52,6 +52,29 @@
         $(window).on('scroll resize', updateStickyNavbar);
     });
 
+    // FAQ show more / show less
+    $(document).ready(function () {
+        var $faqToggleBtn = $('#faqToggleBtn');
+        var $faqExtras = $('.faq-extra');
+
+        if (!$faqToggleBtn.length || !$faqExtras.length) {
+            return;
+        }
+
+        $faqToggleBtn.on('click', function () {
+            var isHidden = $faqExtras.first().hasClass('d-none');
+
+            if (isHidden) {
+                $faqExtras.removeClass('d-none');
+                $faqToggleBtn.text('Show less').attr('aria-expanded', 'true');
+            } else {
+                $faqExtras.find('.collapse.show').collapse('hide');
+                $faqExtras.addClass('d-none');
+                $faqToggleBtn.text('Show more').attr('aria-expanded', 'false');
+            }
+        });
+    });
+
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
