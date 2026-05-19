@@ -29,29 +29,35 @@
     });
 
     // Keep navbar visible while scrolling down
-    $(document).ready(function () {
-        var $navbar = $('.navbar-modern.sticky-top');
+   $(document).ready(function () {
 
-        if (!$navbar.length) {
-            return;
+    var $navbar = $('.navbar-modern.sticky-top');
+
+    if (!$navbar.length) {
+        return;
+    }
+
+    var thresholdTop = $navbar.offset().top;
+
+    function updateStickyNavbar() {
+
+        if ($(window).scrollTop() > thresholdTop) {
+
+            $navbar.addClass('is-fixed');
+            $('body').addClass('has-fixed-navbar');
+
+        } else {
+
+            $navbar.removeClass('is-fixed');
+            $('body').removeClass('has-fixed-navbar');
         }
+    }
 
-        var thresholdTop = $navbar.offset().top;
+    updateStickyNavbar();
 
-        function updateStickyNavbar() {
-            if ($(window).scrollTop() > thresholdTop) {
-                $navbar.addClass('is-fixed');
-                $('body').addClass('has-fixed-navbar');
-            } else {
-                $navbar.removeClass('is-fixed');
-                $('body').removeClass('has-fixed-navbar');
-            }
-        }
+    $(window).on('scroll resize', updateStickyNavbar);
 
-        updateStickyNavbar();
-        $(window).on('scroll resize', updateStickyNavbar);
-    });
-
+});
     // FAQ show more / show less
     $(document).ready(function () {
         var $faqToggleBtn = $('#faqToggleBtn');
