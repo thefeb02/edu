@@ -93,7 +93,7 @@ section, .container-fluid, .section, .hero-section {
 
 .hero-section {
   position: relative;
-  height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,7 +172,7 @@ a.navbar-brand span {
   flex-direction: column;
   position: relative;
   z-index: 3;
-  color: #ffffff;
+  color: inherit;
 }
 
 .hero-trust-badge {
@@ -213,7 +213,7 @@ a.navbar-brand span {
   display: inline-block;
   background: rgba(37, 99, 235, 0.1);
   color: #2563eb;
-  font-size: 0.875rem;
+    align-self: flex-start;
   font-weight: 700;
   letter-spacing: 0.1em;
   padding: 0.5rem 1rem;
@@ -257,7 +257,7 @@ header.topbar .contact-phone .fa {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(135deg, #25D366, #128C7E);
+  background: #25D366; /* WhatsApp brand green */
   color: #ffffff;
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
@@ -268,7 +268,7 @@ header.topbar .contact-phone .fa {
   gap: 0.5rem;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.18s ease;
 }
 
 .side-whatsapp .fa-whatsapp {
@@ -285,11 +285,20 @@ header.topbar .contact-phone .fa {
   transform: translateY(-50%) scale(1.05);
   text-decoration: none;
   color: #ffffff;
+  background: #128C7E; /* darker WhatsApp green on hover */
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
 }
 
 @media (max-width: 767px) {
-  .side-whatsapp { display: none; }
+  .side-whatsapp {
+    display: inline-flex !important;
+    top: auto;
+    bottom: 12px;
+    right: 12px;
+    transform: none;
+    padding: 0.45rem 0.75rem;
+    max-width: calc(100vw - 24px);
+  }
 }
 
 /* Fixed side WhatsApp contact button */
@@ -298,7 +307,7 @@ header.topbar .contact-phone .fa {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(135deg,#25D366,#128C7E);
+  background: #25D366;
   color: #ffffff;
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
@@ -319,10 +328,19 @@ header.topbar .contact-phone .fa {
 .side-whatsapp:focus {
   transform: translateY(-50%) scale(1.02);
   text-decoration: none;
+  background: #128C7E;
 }
 
 @media (max-width: 767px) {
-  .side-whatsapp { display: none; }
+  .side-whatsapp {
+    display: inline-flex !important;
+    top: auto;
+    bottom: 12px;
+    right: 12px;
+    transform: none;
+    padding: 0.45rem 0.75rem;
+    max-width: calc(100vw - 24px);
+  }
 }
 
 .hero-title {
@@ -352,6 +370,7 @@ header.topbar .contact-phone .fa {
   line-height: 1.6;
   color: #000000;
   margin-bottom: 1.25rem;
+  display :none;
 }
 
 .hero-features-pills {
@@ -392,15 +411,15 @@ header.topbar .contact-phone .fa {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  background: #25D366; /* WhatsApp green */
   color: white;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 15px rgba(18, 140, 126, 0.18);
   width: fit-content;
   border: none;
   cursor: pointer;
@@ -408,17 +427,18 @@ header.topbar .contact-phone .fa {
 
 .hero-cta-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  box-shadow: 0 6px 20px rgba(18, 140, 126, 0.22);
+  background: #128C7E; /* darker on hover */
   color: #ffffff;
   text-decoration: none;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
 .hero-cta-button svg {
   width: 20px;
   height: 20px;
 }
+
 
 @keyframes fadeInUp {
   from {
@@ -434,30 +454,55 @@ header.topbar .contact-phone .fa {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: auto;
-    /* reduce top/bottom spacing to avoid large empty area on mobile */
-    padding: 0.6rem 0 0.9rem;
-    height: auto;
+    min-height: 0 !important;
+    height: auto !important;
+    /* remove all spacing to eliminate blank area on mobile */
+    padding: calc(var(--nav-height) + 0.75rem) 0 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
   }
 
-  /* Hide large background image on small screens to avoid double visuals */
+  /* Show scaled hero background on small screens and add overlay for readability */
   .hero-background {
-    display: none;
+    display: block;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    height: 260px; /* mobile-friendly height */
+    top: calc(var(--nav-height) + 0px);
   }
 
   .hero-overlay {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+    display: block !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.32), rgba(0,0,0,0.32));
+    z-index: 1;
   }
 
   .hero-content {
     max-width: 100%;
-    padding: 0.6rem;
-    margin: 0 0.5rem;
-    text-align: center;
+    padding: 0.2rem !important;
+   
+    text-align: left !important;
+    align-self: flex-start !important;
+    color: #ffffff !important;
+    position: relative !important;
+    z-index: 10 !important;
+    padding-top: 0 !important;
+    margin-top:50px;
   }
 
   .hero-trust-badge {
     align-self: center;
+    margin-bottom: 0 !important;
+    margin-top: 80px;
   }
 
   .hero-mobile-img {
@@ -465,29 +510,42 @@ header.topbar .contact-phone .fa {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 0.6rem;
-    margin: 0 0 0.8rem 0;
+    border-radius: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .hero-title {
     font-size: clamp(1.25rem, 5vw, 1.9rem);
-    line-height: 1.25;
-    margin-bottom: 0.6rem;
+    line-height: 1.1;
+    margin-bottom: 0 !important;
+    margin-top: 0.25rem !important;
   }
 
   .hero-subtitle {
     font-size: 0.95rem;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
   }
 
   .hero-wrapper {
-    align-items: flex-start;
-    padding-top: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    align-items: stretch !important;
   }
 
   .hero-cta-button {
     width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    margin: 0 !important;
   }
 }
 
@@ -1071,38 +1129,62 @@ kbd {
   }
 
   .hero-section {
-    padding: 0.35rem 0;
+    padding: calc(var(--nav-height) + 0.5rem) 0 0 !important;
     min-height: auto;
+    height: auto !important;
+    display: block !important;
   }
 
   .hero-content {
-    padding: 0.5rem;
-    margin: 0.25rem;
-    max-width: 100%;
+    padding: 0.2rem !important;
+    margin: 0 !important;
+    margin-top: 0.25rem !important;
+    max-width: 70%;
+    color: #000000 !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
 
+  .hero-wrapper {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+
   section.hero-section .hero-white-card {
-    padding: 0.75rem;
-    margin-left: 0;
-    margin-bottom: 0.5rem;
-    max-width: calc(100% - 0.5rem);
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    max-width: 100%;
     box-shadow: none;
   }
 
   section.hero-section .hero-title {
-    margin-bottom: 0.35rem;
-    font-size: 1.05rem;
-    line-height: 1.15;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    font-size: clamp(1.35rem, 6vw, 1.6rem);
+    line-height: 1.05;
+    color: #000000 !important;
+    white-space: normal !important;
+    max-width: 100%;
+    word-break: normal;
   }
 
   section.hero-section .hero-subtitle {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
     font-size: 0.9rem;
+    color: #000000 !important;
   }
 
   section.hero-section .hero-trust-badge {
-    margin-bottom: 0.75rem;
-    padding: 0.5rem 0.85rem;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0.3rem 0.5rem !important;
   }
 
   section.hero-section .hero-trust-icon {
@@ -1120,8 +1202,11 @@ kbd {
   }
 
   section.hero-section .hero-mobile-img {
-    margin-bottom: 0.5rem;
-    border-radius: 0.5rem;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    border-radius: 0;
+    display: block;
+    width: 100%;
   }
 }
 
@@ -1230,7 +1315,8 @@ pre code {
   flex: 0 0 50%;
   max-width: 50%;
 }
-
+  margin:0;
+  margin-top:calc(var(--nav-height) + 0.75rem) !important;
 .row-cols-3 > * {
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
@@ -10755,8 +10841,9 @@ h6,
 
 .overlay-top::before {
   top: 0;
-  background: url(../img/overlay-top.png) top center no-repeat;
-  background-size: contain;
+  background: url(../img/Herosection.jpeg) top center no-repeat;
+ background-size: cover;
+background-position: center top;
 }
 
 .overlay-bottom::after {
@@ -11633,13 +11720,15 @@ h5 {
 }
 .site-footer .social-icons a:hover { transform: translateY(-3px); background: var(--accent); }
 .site-footer .whatsapp-btn {
-  background: linear-gradient(90deg, #25D366, #128C7E);
+  background: #25D366;
   color: #fff;
   border: none;
   padding: 0.5rem 0.9rem;
   border-radius: 8px;
   display: inline-block;
+  transition: background 0.18s ease;
 }
+.site-footer .whatsapp-btn:hover { background: #128C7E; }
 .site-footer .whatsapp-link { color: #fff; text-decoration: none; }
 .site-footer .footer-bottom { background: #07070a; }
 .site-footer small { color: rgba(255,255,255,0.6); }
@@ -12165,7 +12254,7 @@ h5 {
 
 @media (max-width: 767.98px) {
   .jumbotron {
-    min-height: 100vh;
+    min-height: autovh;
     align-items: flex-start;
   }
 
@@ -13529,86 +13618,107 @@ p, li, span {
 .choose-card-media {
   position: absolute;
   left: 22px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 24px;
   z-index: 5;
 }
 
 .choose-card-icon {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   background: #ffffff;
   color: #2563eb;
-  box-shadow: 0 6px 18px rgba(37,99,235,0.06);
-  font-size: 1.05rem;
+  box-shadow: 0 6px 18px rgba(37,99,235,0.08);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  
+}
+
+.choose-card {
+  position: relative;
+  padding-left: 5.5rem !important;
+  overflow: hidden;
 }
 
 .choose-card h4 {
-  margin-left: 0 !important;
-  margin-bottom: 0.3rem !important;
+  margin: 0 0 0.5rem 0 !important;
+  line-height: 1.35;
+  word-break: break-word;
 }
 
 .choose-card-title-lg {
-  font-size: 1.38rem;
-  line-height: 1.15;
+  font-size: 1.25rem;
+  line-height: 1.3;
 }
 
 .choose-card p {
-  margin-left: 0 !important;
+  margin: 0 !important;
   color: #556070;
+  line-height: 1.7;
+  word-break: break-word;
 }
 
 .choose-card-copy {
   display: block;
   width: 100%;
-  margin: 0 !important;
   color: #556070;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
+/* ================= MOBILE FIX ================= */
+
 @media (max-width: 767.98px) {
+
   .choose-card {
-    padding-left: 4.5rem !important;
+    padding-left: 4.8rem !important;
+    padding-right: 1rem !important;
   }
 
-
-  .choose-card-title-lg {
-    font-size: 1.22rem;
-  }
   .choose-card::before {
     left: 8px;
-    width: 6px;
+    width: 5px;
     border-radius: 10px;
   }
 
-  .choose-card-media { left: 18px; }
-  .choose-card-icon { width: 40px; height: 40px; }
+  .choose-card-media {
+    left: 16px;
+    top: 20px;
+  }
+
+  .choose-card-icon {
+    width: 38px;
+    height: 20px;
+    font-size: 0.95rem;
+    margin-top:-20px;
+    
+  }
+
+  /* Add extra vertical spacing and safe padding so cards don't visually overlap on small screens */
+  .choose-us-item {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .choose-card {
+    padding-top: 0.9rem !important;
+    padding-bottom: 0.9rem !important;
+  }
+
+  .choose-card-title-lg {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .choose-card p,
+  .choose-card-copy {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
 }
- 
-/* ── PRINT ─────────────────────────────────────────────────── */
-@media print {
-  .navbar,
-  .site-footer,
-  .back-to-top,
-  .hero-card {
-    display: none !important;
-  }
- 
-  .jumbotron {
-    min-height: auto !important;
-    background: none !important;
-    color: #000 !important;
-  }
- 
-  section,
-  .container.py-5,
-  .container-fluid.py-5 {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
+@media (max-width: 768px){
+  .hero-background {
+  min-height: 100%;
+}
 }
