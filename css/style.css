@@ -126,7 +126,8 @@ section, .container-fluid, .section, .hero-section {
 
 @media (min-width: 1440px) {
   .hero-section {
-    padding: calc(var(--nav-height) + 0.35rem) 0 1.1rem;
+    min-height: calc(100vh - var(--nav-height));
+    padding: calc(var(--nav-height) + 0.25rem) 0 0.75rem;
   }
 
   .hero-wrapper {
@@ -134,13 +135,13 @@ section, .container-fluid, .section, .hero-section {
   }
 
   .hero-background {
-    background-size: clamp(860px, 48vw, 1120px) auto !important;
-    background-position: 98% center !important;
+    background-size: cover !important;
+    background-position: right center !important;
   }
 
   .hero-content {
     max-width: 600px;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
   }
 }
 
