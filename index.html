@@ -589,6 +589,26 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+window.onload = function () {
+  document.querySelectorAll('*').forEach(el => {
+    if (el.offsetHeight > 500 && el.innerHTML.trim() === '') {
+      el.style.display = 'herosection.jpeg';
+    }
+  });
+};
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("section, div").forEach(el => {
+        if (el.offsetHeight > 400) {
+            el.style.minHeight = "auto";
+            el.style.height = "auto";
+        }
+    });
+});
+</script>
 </body>
 
 </html>
