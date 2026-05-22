@@ -32,6 +32,9 @@
   --accent: #1d4ed8;
   --accent-2: #0b2f6b;
   --accent-soft: rgba(37, 99, 235, 0.12);
+  --paper: #f8fbff;
+  --border: #e9eef6;
+  --nav-height: 56px;
 }
 
 *,
@@ -46,7 +49,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   scroll-behavior: smooth;
-  scroll-padding-top: 92px;
+  scroll-padding-top: var(--nav-height);
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -69,15 +72,6 @@ body {
 }
 
 /* Page and scroll-snap settings */
-:root {
-  --nav-height: 56px;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-height);
-}
-
 body {
   scroll-snap-type: y mandatory;
 }
@@ -106,7 +100,7 @@ section, .container-fluid, .section, .hero-section {
 .hero-background {
   position: absolute;
   /* start the background below the fixed navbar so the subject's head isn't hidden */
-  top: calc(var(--nav-height) + 8px);
+  top: calc(var(--nav-height) + 2px);
   left: 0;
   right: 0;
   bottom: 0;
@@ -116,6 +110,18 @@ section, .container-fluid, .section, .hero-section {
   background-repeat: no-repeat;
   background-color: #ffffff;
   z-index: 0;
+}
+
+/* Desktop: keep full hero image visible without cropping
+   - Use `contain` so the full image is shown on large screens
+   - Mobile overrides below will switch to `cover` for a background-style hero */
+@media (min-width: 769px) {
+  .hero-background {
+    background-size: contain !important;
+    background-position: right center !important;
+    background-repeat: no-repeat !important;
+    top: calc(var(--nav-height) + 2px) !important;
+  }
 }
 
 .hero-overlay {
@@ -179,7 +185,20 @@ a.navbar-brand span {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  align-self: flex-start;
+    /* keep full-width CTA but align icon and text vertically */
+    left: 12px !important;
+    right: auto !important;
+    width: auto !important;
+    max-width: calc(100% - 24px);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.32rem 0.6rem !important;
+    font-size: 0.74rem !important;
+    min-height: 40px !important;
+    box-sizing: border-box;
+    margin-top: 0.25rem !important; /* move up slightly */
+    gap: 0.45rem !important;
   margin-bottom: 1rem;
   padding: 0.55rem 1rem;
   border-radius: 999px;
@@ -301,47 +320,7 @@ header.topbar .contact-phone .fa {
   }
 }
 
-/* Fixed side WhatsApp contact button */
-.side-whatsapp {
-  position: fixed;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #25D366;
-  color: #ffffff;
-  padding: 0.55rem 0.9rem;
-  border-radius: 999px;
-  box-shadow: 0 8px 20px rgba(15,23,42,0.18);
-  z-index: 2200;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.side-whatsapp .fa-whatsapp {
-  font-size: 1.15rem;
-}
-
-.side-whatsapp:hover,
-.side-whatsapp:focus {
-  transform: translateY(-50%) scale(1.02);
-  text-decoration: none;
-  background: #128C7E;
-}
-
-@media (max-width: 767px) {
-  .side-whatsapp {
-    display: inline-flex !important;
-    top: auto;
-    bottom: 12px;
-    right: 12px;
-    transform: none;
-    padding: 0.45rem 0.75rem;
-    max-width: calc(100vw - 24px);
-  }
-}
+/* Note: side-whatsapp rules already defined above; duplicate instance removed. */
 
 .hero-title {
   font-family: 'Jost', sans-serif;
@@ -383,7 +362,7 @@ header.topbar .contact-phone .fa {
 .feature-pill {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.25rem;
   font-size: 0.95rem;
   color: #000000;
   font-weight: 500;
@@ -395,8 +374,8 @@ header.topbar .contact-phone .fa {
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: #10b981;
-  color: white;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   font-size: 0.875rem;
   font-weight: bold;
@@ -467,11 +446,14 @@ header.topbar .contact-phone .fa {
   /* Show scaled hero background on small screens and add overlay for readability */
   .hero-background {
     display: block;
+    /* fill the hero area so the subject is visible and acts as a backdrop */
     background-size: cover !important;
-    background-position: center center !important;
+    background-position: 78% center !important;
     background-repeat: no-repeat !important;
     background-attachment: scroll !important;
-    height: 260px; /* mobile-friendly height */
+    /* increase mobile area so content and CTA fit without clipping */
+    min-height: 560px; /* increased for more vertical room on mobile */
+    height: auto;
     top: calc(var(--nav-height) + 0px);
   }
 
@@ -487,22 +469,41 @@ header.topbar .contact-phone .fa {
   }
 
   .hero-content {
-    max-width: 100%;
-    padding: 0.2rem !important;
-   
+    /* position overlay content over the hero image (mobile only) and move it up */
+    position: absolute !important;
+    top: 10px !important;
+    left: 14px !important;
+    right: 14px !important;
+    max-width: calc(100% - 28px) !important;
+    padding: 0.5rem 0 !important;
     text-align: left !important;
     align-self: flex-start !important;
     color: #ffffff !important;
-    position: relative !important;
-    z-index: 10 !important;
-    padding-top: 0 !important;
-    margin-top:50px;
+    z-index: 12 !important;
+    margin-top: 0 !important;
+    overflow: visible !important;
+    padding-bottom: 8rem !important; /* extra space so CTA/pills never overlap */
   }
 
   .hero-trust-badge {
-    align-self: center;
+    align-self: flex-start;
     margin-bottom: 0 !important;
-    margin-top: 80px;
+    margin-top: 28px; /* reduced to remove extra line space under title */
+    max-width: 100%;
+    white-space: normal;
+    background: rgba(0,0,0,0.48);
+    color: #fff;
+    padding: 0.32rem 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .hero-features-pills {
+    gap: 0.18rem;
+    flex-wrap: wrap;
+    margin-top: 4px; /* pull pills closer to badge/title */
+    margin-bottom: 0.12rem;
   }
 
   .hero-mobile-img {
@@ -516,14 +517,16 @@ header.topbar .contact-phone .fa {
   }
 
   .hero-title {
-    font-size: clamp(1.25rem, 5vw, 1.9rem);
-    line-height: 1.1;
+    font-size: clamp(1.12rem, 4.8vw, 1.62rem);
+    line-height: 1.06;
     margin-bottom: 0 !important;
-    margin-top: 0.25rem !important;
+    margin-top: 0.15rem !important;
+    color: #ffffff !important;
+    text-shadow: 0 4px 18px rgba(0,0,0,0.45) !important;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     margin-bottom: 0 !important;
     margin-top: 0 !important;
   }
@@ -542,10 +545,113 @@ header.topbar .contact-phone .fa {
   }
 
   .hero-cta-button {
-    width: 100%;
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+    /* make CTA float over image on mobile like the screenshot */
+    width: auto;
+    position: absolute !important;
+    left: 14px !important;
+    bottom: 12px !important;
+    z-index: 13 !important;
+    padding: 0.36rem 0.7rem !important;
     margin: 0 !important;
+    font-size: 0.78rem !important;
+    line-height: 1 !important;
+    box-shadow: 0 10px 30px rgba(240, 239, 239, 0.28) !important;
+  }
+
+  .hero-cta-button svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.25rem;
+  }
+
+  /* ensure pill text is readable on dark backdrop */
+  .feature-pill, .pill-text {
+    color: #ffffff !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-background {
+    background-position: 84% center !important;
+    min-height: 520px; /* increased for small phones */
+  }
+
+  .hero-content {
+    top: 8px !important;
+    left: 12px !important;
+    right: 12px !important;
+    max-width: calc(100% - 24px) !important;
+    padding-bottom: 7rem !important;
+  }
+
+  .hero-trust-badge {
+    margin-top: 56px;
+    padding: 0.28rem 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  /* Compact the feature pills and badge so the two lines sit tightly */
+  .hero-features-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem; /* reduce vertical gap between lines */
+    row-gap: 0.12rem;
+    column-gap: 0.35rem;
+    margin: 0 0 0.1rem 0;
+  }
+
+  .feature-pill {
+    margin: 0;
+    padding: 0.18rem 0.44rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .pill-text {
+    margin: 0;
+    line-height: 1;
+    font-size: 0.86rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.03rem, 5vw, 1.45rem);
+    line-height: 1.04;
+  }
+
+  .hero-subtitle {
+    font-size: 0.78rem;
+  }
+
+  .hero-cta-button {
+    /* Make CTA flow under the content on very small screens to avoid overlap */
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.35rem !important;
+    width: auto !important;
+    max-width: 92% !important;
+    align-self: flex-start !important;
+    margin-top: 0.22rem !important;
+    padding: 0.42rem 0.6rem !important;
+    font-size: 0.82rem !important;
+    min-height: 40px !important;
+    box-sizing: border-box;
+    border-radius: 10px !important;
+    line-height: 1 !important;
+    text-align: left !important;
+  }
+
+  .hero-cta-button svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
   }
 }
 
@@ -669,12 +775,7 @@ b, strong {
   background-color: transparent;
 }
 
-.hero-content {
-  max-width: 550px;
-  padding: 3rem;
-  margin-left: 3rem;
-  animation: fadeInUp 0.8s ease 0.2s backwards;
-}
+/* Consolidated hero-content rules: display/position defined earlier, layout and animation combined below. */
 a:hover {
   color: #0f3d8a;
   text-decoration: underline;
@@ -709,9 +810,11 @@ samp {
 }
   
   .hero-content {
+    max-width: 550px;
     padding: 2rem;
     margin-left: 0;
     margin: 0 1rem;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
   }
 pre {
   margin-top: 0;
@@ -1168,23 +1271,26 @@ kbd {
     margin-top: 0 !important;
     font-size: clamp(1.35rem, 6vw, 1.6rem);
     line-height: 1.05;
-    color: #000000 !important;
+    color: #fff !important;
     white-space: normal !important;
     max-width: 100%;
     word-break: normal;
+    
   }
 
   section.hero-section .hero-subtitle {
     margin-bottom: 0 !important;
     margin-top: 0 !important;
     font-size: 0.9rem;
-    color: #000000 !important;
+    color: #fff !important;
   }
 
   section.hero-section .hero-trust-badge {
     margin-bottom: 0 !important;
     margin-top: 0 !important;
     padding: 0.3rem 0.5rem !important;
+     top: -10px;
+     position: relative;
   }
 
   section.hero-section .hero-trust-icon {
@@ -1315,8 +1421,6 @@ pre code {
   flex: 0 0 50%;
   max-width: 50%;
 }
-  margin:0;
-  margin-top:calc(var(--nav-height) + 0.75rem) !important;
 .row-cols-3 > * {
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
@@ -1627,6 +1731,91 @@ pre code {
   .order-sm-7 {
     order: 7;
   }
+
+  /* Mobile hero final overrides - placed at file end to ensure precedence */
+  @media (max-width: 768px) {
+    .hero-trust-badge {
+      position: absolute !important;
+      top: calc(var(--nav-height) + 2px) !important; /* nudge badge closer to navbar */
+      left: 8px !important;
+      padding: 0.45rem 0.9rem !important;
+      background: rgba(13, 71, 161, 0.95) !important; /* deep blue badge */
+      color: #ffffff !important;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35) !important;
+      z-index: 1201 !important;
+      border-radius: 20px !important;
+      font-weight: 700 !important;
+    }
+
+    .hero-content {
+      position: absolute !important;
+      /* place content below the badge */
+      top: calc(var(--nav-height) + 56px) !important;
+      left: 12px !important;
+      right: 12px !important;
+      max-width: calc(100% - 24px) !important;
+      color: #fff !important;
+      z-index: 1100 !important;
+      padding: 0 !important;
+    }
+
+    .hero-title {
+      font-size: 1.6rem !important;
+      line-height: 1.05 !important;
+      color: #ffffff !important;
+      margin-bottom: 6px !important;
+      white-space: normal !important;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.55) !important;
+    }
+
+    .hero-features-pills {
+      margin-top: 6px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+
+    .feature-pill {
+      background: rgba(0,0,0,0.32) !important;
+      padding: 6px 10px !important;
+      border-radius: 8px !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
+    }
+
+    .hero-cta-button {
+      position: absolute !important;
+      left: 12px !important;
+      right: 12px !important;
+      bottom: 18px !important; /* place CTA above bottom edge */
+      z-index: 1202 !important;
+      width: calc(100% - 24px) !important;
+      padding: 0.9rem 1rem !important;
+      border-radius: 12px !important;
+      background: linear-gradient(180deg, #2ecc71, #20b25a) !important;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.36) !important;
+      font-size: 1.05rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.75rem !important;
+      color: #ffffff !important;
+    }
+
+    .feature-pill .pill-icon {
+      width: 30px !important;
+      height: 30px !important;
+      background: #10b981 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 50% !important;
+      font-size: 0.95rem !important;
+    }
+  }
+
+
+
   .order-sm-8 {
     order: 8;
   }
@@ -13721,4 +13910,26 @@ p, li, span {
   .hero-background {
   min-height: 100%;
 }
+}
+@media (max-width: 768px){
+
+  .choose-card{
+    position: relative;
+  }
+
+  .choose-content{
+    width: 60%;   /* text takes left side */
+    padding: 15px;
+  }
+
+  .choose-card img{
+    width: 35%;   /* image smaller */
+    right: 0;
+    position: absolute;
+  }
+
+  .whatsapp-btn{
+    margin-top: 10px;
+  }
+
 }
