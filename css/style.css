@@ -126,8 +126,10 @@ section, .container-fluid, .section, .hero-section {
 
 @media (min-width: 1440px) {
   .hero-section {
-    min-height: calc(100vh - var(--nav-height));
-    padding: calc(var(--nav-height) + 0.25rem) 0 0.75rem;
+    min-height: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: calc(var(--nav-height) + 0.15rem) 0 0.4rem;
   }
 
   .hero-wrapper {
@@ -135,13 +137,13 @@ section, .container-fluid, .section, .hero-section {
   }
 
   .hero-background {
-    background-size: cover !important;
-    background-position: right center !important;
+    background-size: clamp(1200px, 64vw, 1560px) auto !important;
+    background-position: 68% center !important;
   }
 
   .hero-content {
-    max-width: 600px;
-    margin-top: 0.25rem;
+    max-width: 560px;
+    margin-top: 0;
   }
 }
 
