@@ -470,14 +470,19 @@ a.navbar-brand span {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 0 !important;
+    min-height: 100px !important;
     height: auto !important;
-    /* remove all spacing to eliminate blank area on mobile */
-    padding: calc(var(--nav-height) + 0.5rem) 0 0 !important;
+    /* keep enough space so the hero background/content can render on mobile */
+    padding: calc(var(--nav-height) + 0.5rem) 0 1rem !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
+      overflow: hidden;
+       position: relative;
+         padding-bottom: 0 !important;
+
+    
   }
 
   /* Show scaled hero background on small screens and add overlay for readability */
@@ -485,13 +490,22 @@ a.navbar-brand span {
     display: block;
     /* fill the hero area so the subject is visible and acts as a backdrop */
     background-size: cover !important;
-    background-position: 78% center !important;
+    background-position: 82% center !important;
     background-repeat: no-repeat !important;
     background-attachment: scroll !important;
     /* increase mobile area so content and CTA fit without clipping */
-    min-height: 616px; /* 10% more vertical room on mobile */
-    height: auto;
-    top: calc(var(--nav-height) + 0px);
+    /* 10% more vertical room on mobile */
+    width: 100%;
+    height: 41vh !important;
+   
+    padding-bottom: 0 !important;
+     position: absolute;
+  top: 15;
+  left: 0;
+  right: 0;
+  bottom: 0;
+    
+    
   }
 
   .hero-overlay {
@@ -507,7 +521,7 @@ a.navbar-brand span {
 
   .hero-content {
     /* position overlay content over the hero image (mobile only) and move it up */
-    position: absolute !important;
+    position: relative !important;
     top: 16px !important;
     left: 14px !important;
     right: 14px !important;
@@ -518,7 +532,8 @@ a.navbar-brand span {
     color: #ffffff !important;
     z-index: 12 !important;
     margin-top: 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
+    min-height: 520px;
     padding-bottom: 8.8rem !important; /* extra space so CTA/pills never overlap */
   
      
@@ -612,7 +627,8 @@ a.navbar-brand span {
 @media (max-width: 480px) {
   .hero-background {
     background-position: 84% center !important;
-    min-height: 572px; /* 10% more vertical room for small phones */
+    min-height: 252px; /* 10% more vertical room for small phones */
+    width: 100%;
   }
 
   .hero-content {
@@ -621,10 +637,15 @@ a.navbar-brand span {
     right: 12px !important;
     bottom: 13px !important;
     max-width: calc(100% - 24px) !important;
-    padding-bottom: 7.7rem !important;
-     transform: translateX(10px);
+    padding-bottom: 0.5rem !important;
+     transform: none;
 
   }
+
+  /* Remove empty gap under hero image on very small screens */
+  section.hero-section { padding-bottom: 0 !important; }
+  .hero-background img { display: block; max-width: 100%; height: auto; margin-bottom: 0; }
+  
 
   .hero-trust-badge {
     margin-top: 56px;
@@ -1321,6 +1342,7 @@ kbd {
     border-radius: 0;
     display: block;
     width: 100%;
+   
   }
 }
 
@@ -4995,7 +5017,7 @@ input[type="button"].btn-block {
   align-items: flex-start;
   justify-content: center;
   margin-left: 15px;
-  line-height: 1;
+  line-height: 0.1;
   font-family: 'Jost', 'Open Sans', sans-serif;
 }
 
@@ -5023,6 +5045,26 @@ input[type="button"].btn-block {
   line-height: 1;
 }
 
+@media (max-width: 768px) {
+  .navbar-brand .logo-img {
+    height: 42px;
+    margin-right: 10px;
+  }
+
+  .navbar-brand > .navbar-brand-text {
+    margin-left: 8px;
+  }
+
+  .navbar-brand-text .brand-shiksha {
+    font-size: 1.18rem !important;
+  }
+
+  .navbar-brand-text .brand-hub {
+    font-size: 0.66rem !important;
+    margin-top: 1px;
+  }
+}
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -5036,6 +5078,7 @@ input[type="button"].btn-block {
   font-size: 0.9rem;
   text-decoration: none;
 }
+
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
@@ -13544,6 +13587,39 @@ p, li, span {
     display: none !important;
   }
 }
+
+/* Exact-device override: show brand text on iPhone-size 375x667 portrait only */
+@media only screen and (width: 375px) and (height: 667px) and (orientation: portrait) {
+  .navbar-brand span {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    margin-left: 6px !important;
+  }
+
+  .navbar-brand .logo-img {
+    height: 40px !important;
+    margin-right: 6px !important;
+  }
+
+  .navbar-brand-text .brand-shiksha {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #0b3a7a !important;
+  }
+
+  .navbar-brand-text .brand-hub {
+    font-size: 0.68rem !important;
+    font-weight: 600 !important;
+    color: #00aef0 !important;
+    margin-top: 1px !important;
+  }
+
+  /* tighten spacing so it fits beside hamburger */
+  nav.navbar { padding-left: 8px !important; padding-right: 8px !important; }
+}
  
 /* ================================================================
    TABLET — 576px to 767px
@@ -13922,7 +13998,7 @@ p, li, span {
     width: 38px;
     height: 20px;
     font-size: 0.95rem;
-    margin-top:-20px;
+  
     
   }
 
@@ -13939,6 +14015,37 @@ p, li, span {
   .choose-card-title-lg {
     font-size: 1rem;
     line-height: 1.4;
+  }
+
+  .choose-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.55rem;
+    row-gap: 0.35rem;
+    align-items: center;
+  }
+
+  .choose-card-media {
+    position: static;
+    left: auto;
+    top: auto;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .choose-card h4 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 !important;
+    line-height: 1.2;
+  }
+
+  .choose-card p {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   .choose-card p,
@@ -13964,7 +14071,7 @@ p, li, span {
   }
 
   .choose-card img{
-    width: 35%;   /* image smaller */
+    width: 50%;   /* image smaller */
     right: 0;
     position: absolute;
   }
@@ -13977,7 +14084,7 @@ p, li, span {
 /* iPad/tablet hero fallback: prevent collapsed hero caused by absolute children */
   @media (min-width: 768px) and (max-width: 1024px) {
     .hero-section {
-      min-height:auto !important;
+      min-height:600px !important;
       padding: calc(var(--nav-height) + 0.8rem) 0 1rem !important;
       align-items: flex-start !important;
       justify-content: flex-start !important;
@@ -13995,6 +14102,7 @@ p, li, span {
       bottom: 0 !important;
       background-size: cover !important;
       background-position: 72% center !important;
+      
     }
 
     .hero-overlay {
