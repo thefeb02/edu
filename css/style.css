@@ -5010,7 +5010,7 @@ input[type="button"].btn-block {
 /* Individual brand lines: primary (Shiksha) and secondary (Education Hub) */
 .navbar-brand-text .brand-shiksha {
   color: #0b3a7a; /* deep blue for main word */
-  font-size: 1.65rem !important;
+  font-size: 1.70rem !important;
   font-weight: 700 !important;
   line-height: 1;
 }
