@@ -187,7 +187,8 @@ nav.navbar.navbar-modern {
 }
 
 a.navbar-brand .logo-img {
-  height: 28px;
+  height: 48px;
+  width: auto;
 }
 
 a.navbar-brand span {
@@ -435,7 +436,7 @@ a.navbar-brand span {
   width: fit-content;
   border: none;
   cursor: pointer;
-  margin-top:-30px;
+  margin-top:-10px;
 }
 
 .hero-cta-button:hover {
@@ -1334,7 +1335,7 @@ kbd {
     padding: 0.2rem 0.2rem !important;
      top: -10px;
      position: relative;
-     margin: left-40px;
+     margin: left-43px;
   }
 
   section.hero-section .hero-trust-icon {
@@ -5014,13 +5015,43 @@ input[type="button"].btn-block {
   padding-top: 0;
   padding-bottom: 0;
   margin-right: 0.25rem;
-  font-size: 1.1rem;
   line-height: inherit;
   white-space: nowrap;
 }
 
-.navbar-brand span {
-  font-size: 1rem !important;
+.navbar-brand > span {
+  font-size: 1.02rem !important;
+  text-align:center;
+  color:blue;
+}
+
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:focus,
+.navbar-brand .brand-line {
+  text-decoration: none !important;
+}
+
+.navbar-brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  font-size: 0.5rem !important;
+}
+
+.navbar-brand-text .brand-line {
+  display: block;
+}
+
+.navbar-brand-text .brand-shiksha {
+  color: #0f3d8a;
+  font-size: 1.08em !important;
+}
+
+.navbar-brand-text .brand-hub {
+  color: #38bdf8;
+  font-size: 0.96em !important;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
