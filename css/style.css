@@ -1334,7 +1334,7 @@ kbd {
     padding: 0.2rem 0.2rem !important;
      top: -10px;
      position: relative;
-     margin-left:-45px;
+     margin: left-40px;
   }
 
   section.hero-section .hero-trust-icon {
