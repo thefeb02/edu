@@ -187,12 +187,14 @@ nav.navbar.navbar-modern {
 }
 
 a.navbar-brand .logo-img {
-  height: 48px;
+  height: 56px;
   width: auto;
+  margin-right: 10px;
 }
 
 a.navbar-brand span {
-  font-size: 0.95rem;
+  font-size: inherit;
+  display: inline-block;
 }
 
 .hero-wrapper {
@@ -1269,46 +1271,7 @@ kbd {
   nav.navbar.navbar-modern {
     padding: 0.25rem 0;
   }
-
-  a.navbar-brand .logo-img {
-    height: 38px;
-  }
-
-  .hero-section {
-    padding: calc(var(--nav-height) + 0.5rem) 0 0 !important;
-    min-height: auto;
-    height: auto !important;
-    display: block !important;
-  }
-
-  .hero-content {
-    padding: 0.2rem !important;
-    margin: 0 !important;
-    margin-top: 0.25rem !important;
-    max-width: 70%;
-    color: #000000 !important;
-    position: relative !important;
-    z-index: 10 !important;
-  }
-
-  .hero-wrapper {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-
-  section.hero-section .hero-white-card {
-    padding: 0 !important;
-    margin-left: 0 !important;
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
-    max-width: 100%;
-    box-shadow: none;
-  }
-
+  /* small-screen tweaks kept minimal here; brand styles are global to avoid duplication */
   section.hero-section .hero-title {
     margin-bottom: 0 !important;
     margin-top: 0 !important;
@@ -5011,20 +4974,32 @@ input[type="button"].btn-block {
 }
 
 .navbar-brand {
-  display: inline-block;
+  text-align:center;
   padding-top: 0;
   padding-bottom: 0;
-  margin-right: 0.25rem;
+  margin-right: 0.4rem;
   line-height: inherit;
   white-space: nowrap;
 }
 
-.navbar-brand > span {
-  font-size: 1.02rem !important;
-  text-align:center;
-  color:blue;
+.navbar-brand .logo-img {
+  height: 56px;
+  width: auto;
+  margin-right: 20px;
 }
 
+/* Brand wrapper (next to logo) - global */
+.navbar-brand > .navbar-brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 15px;
+  line-height: 1;
+  font-family: 'Jost', 'Open Sans', sans-serif;
+}
+
+/* Remove underline on brand and make sure hover doesn't underline */
 .navbar-brand,
 .navbar-brand:hover,
 .navbar-brand:focus,
@@ -5032,30 +5007,20 @@ input[type="button"].btn-block {
   text-decoration: none !important;
 }
 
-.navbar-brand-text {
-  display: inline-flex;
-  flex-direction: column;
-  line-height: 0.95;
-  letter-spacing: 0.04em;
-  font-size: 0.5rem !important;
-}
-
-.navbar-brand-text .brand-line {
-  display: block;
-}
-
+/* Individual brand lines: primary (Shiksha) and secondary (Education Hub) */
 .navbar-brand-text .brand-shiksha {
-  color: #0f3d8a;
-  font-size: 1.08em !important;
+  color: #0b3a7a; /* deep blue for main word */
+  font-size: 1.50rem !important;
+  font-weight: 700 !important;
+  line-height: 1;
 }
 
 .navbar-brand-text .brand-hub {
-  color: #38bdf8;
-  font-size: 0.96em !important;
-}
-
-.navbar-brand:hover, .navbar-brand:focus {
-  text-decoration: none;
+  color: #00aef0; /* sky blue */
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  margin-top: 2px;
+  line-height: 1;
 }
 
 .navbar-nav {
