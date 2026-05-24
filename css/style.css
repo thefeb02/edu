@@ -35,6 +35,8 @@
   --paper: #f8fbff;
   --border: #e9eef6;
   --nav-height: 56px;
+  --whatsapp-green: #25D366;
+  --whatsapp-green-dark: #128C7E;
 }
 
 *,
@@ -336,7 +338,7 @@ a.navbar-brand span {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  background: #25D366; /* WhatsApp brand green */
+  background: var(--whatsapp-green); /* WhatsApp brand green */
   color: #ffffff;
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
@@ -364,7 +366,7 @@ a.navbar-brand span {
   transform: translateY(-50%) scale(1.05);
   text-decoration: none;
   color: #ffffff;
-  background: #128C7E; /* darker WhatsApp green on hover */
+  background: var(--whatsapp-green-dark); /* darker WhatsApp green on hover */
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
 }
 
@@ -452,7 +454,7 @@ a.navbar-brand span {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: #25D366; /* WhatsApp green */
+  background: var(--whatsapp-green); /* WhatsApp green */
   color: white;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
@@ -3278,15 +3280,18 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #2563eb;
-  border-color: #2563eb;
+  background-color:#25D366;
+  border-color: #25D366
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #1d4ed8;
-  border-color: #1d4ed8;
+    transform: translateY(-50%) scale(1.05);
+  text-decoration: none;
+  color: #ffffff;
+  background: var(--whatsapp-green-dark); /* darker WhatsApp green on hover */
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
 }
+
 
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
@@ -11979,16 +11984,7 @@ h5 {
 .site-footer .footer-top {
   background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
 }
-.site-footer .footer-logo {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.site-footer .footer-brand span {
-  font-size: 1.05rem;
-  color: var(--white);
-}
+
 .site-footer p {
   color: rgba(255,255,255,0.85);
 }
@@ -12019,23 +12015,22 @@ h5 {
 }
 .site-footer .social-icons a:hover { transform: translateY(-3px); background: var(--accent); }
 .site-footer .whatsapp-btn {
-  background: #25D366;
+  background: var(--whatsapp-green);
   color: #fff;
   border: none;
   padding: 0.5rem 0.9rem;
   border-radius: 8px;
   display: inline-block;
   transition: background 0.18s ease;
+      text-decoration: none !important;
 }
-.site-footer .whatsapp-btn:hover { background: #128C7E; }
+.site-footer .whatsapp-btn:hover { background: var(--whatsapp-green-dark); }
 .site-footer .whatsapp-link { color: #fff; text-decoration: none; }
 .site-footer .footer-bottom { background: #07070a; }
 .site-footer small { color: rgba(255,255,255,0.6); }
 
 @media (max-width: 767.98px) {
   .site-footer .footer-top { padding-bottom: 1.1rem; }
-  .site-footer .footer-brand { align-items: flex-start; }
-  .site-footer .footer-logo { width: 56px; height: 56px; }
   .site-footer .whatsapp-btn { width: 100%; text-align: center; }
 }
 
@@ -12514,6 +12509,7 @@ h5 {
 .navbar .btn {
   padding: 0.3rem 0.75rem !important;
   font-size: 0.9rem;
+      text-decoration: none !important;
 }
 
 .container-fluid.py-5,
@@ -13869,6 +13865,11 @@ p, li, span {
   position: relative;
   z-index: 2;
 }
+/* Make each column a flex container so cards can stretch to equal height */
+.how-steps .row > [class*="col-"] {
+  display: flex;
+  align-items: stretch;
+}
 .how-step-card {
   background: #ffffff;
   border-radius: 12px;
@@ -13876,7 +13877,11 @@ p, li, span {
   text-align: center;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
   position: relative;
-  min-height: 210px;
+  min-height: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
 }
 .how-step-badge {
   width: 44px;
