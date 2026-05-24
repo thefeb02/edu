@@ -20,13 +20,28 @@
     
     
     // Back to top button
-    $(window).scroll(function () {
+    var $backToTop = $('.back-to-top');
+
+    if (!$backToTop.length) {
+        $backToTop = $('<a>', {
+            href: '#',
+            class: 'btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top',
+            'aria-label': 'Back to top'
+        }).html('<i class="fa fa-angle-double-up"></i>');
+
+        $('body').append($backToTop);
+    }
+
+    function toggleBackToTopButton() {
         if ($(this).scrollTop() > 100) {
-            $('.back-to-top').fadeIn('slow');
+            $backToTop.fadeIn('slow');
         } else {
-            $('.back-to-top').fadeOut('slow');
+            $backToTop.fadeOut('slow');
         }
-    });
+    }
+
+    toggleBackToTopButton.call(window);
+    $(window).on('scroll', toggleBackToTopButton);
 
     // Keep navbar visible while scrolling down
    $(document).ready(function () {
@@ -81,9 +96,9 @@
         });
     });
 
-    $('.back-to-top').click(function () {
+    $backToTop.on('click', function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
+        return true;
     });
 
 

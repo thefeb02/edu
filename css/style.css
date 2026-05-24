@@ -131,9 +131,9 @@ section, .container-fluid, .section, .hero-section {
 
 
 
-@media (min-width: 1440px) {
+@media (min-width: 2700px) {
   .hero-section {
-    min-height: 0;
+    min-height: auto;
     align-items: flex-start;
     justify-content: flex-start;
     padding: calc(var(--nav-height) + 0.15rem) 0 0.4rem;
@@ -145,14 +145,40 @@ section, .container-fluid, .section, .hero-section {
 
   .hero-background {
     background-size: clamp(1200px, 64vw, 1560px) auto !important;
-    background-position: 68% center !important;
-    top: calc(var(--nav-height) + 12px) !important;
+    background-position: 50% center !important;
+    top: calc(var(--nav-height) + 10px) !important;
   }
 
   .hero-content {
     max-width: 560px;
     margin-top: 0;
     
+  }
+}
+
+@media (min-width: 1600px) {
+  .navbar .container-fluid,
+  .hero-wrapper,
+  .about-modern-shell,
+  #features .container,
+  #services .container,
+  .how-it-works-section .container,
+  #faq .container,
+  .site-footer .container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-wrapper,
+  .about-modern-shell,
+  #features .container,
+  #services .container,
+  .how-it-works-section .container,
+  #faq .container,
+  .site-footer .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
@@ -626,8 +652,8 @@ a.navbar-brand span {
 
 @media (max-width: 480px) {
   .hero-background {
-    background-position: 84% center !important;
-    min-height: 252px; /* 10% more vertical room for small phones */
+    background-position: 80% center !important;
+    min-height: 300px; /* 10% more vertical room for small phones */
     width: 100%;
   }
 
@@ -12452,7 +12478,7 @@ h5 {
 @media (max-width: 576px) {
   .about-modern-card {
     min-height: 160px;
-    padding: 1.1rem 1rem;
+    padding:0.8rem 0.8rem;
   }
 
   .about-modern-visual {
@@ -12475,7 +12501,7 @@ h5 {
 #about p {
   font-size: 1rem;
   line-height: 1.65;
-  color: #5f6472;
+  color: black;
   margin-bottom: 1.2rem;
 }
 
@@ -13409,7 +13435,7 @@ p, li, span {
  
   .container,
   .container-fluid {
-    padding-left: 14px !important;
+    padding-left: 27px !important;
     padding-right: 14px !important;
   }
  
@@ -13827,7 +13853,7 @@ p, li, span {
 }
 .how-steps-wrapper {
   position: relative;
-  padding-top: 2.25rem;
+  padding-top: 0.25rem;
   padding-bottom: 1rem;
 }
 .how-connector {
@@ -13905,8 +13931,8 @@ p, li, span {
 
 @media (max-width: 575.98px) {
   .how-connector { display: none; }
-  .how-step-card { padding-top: 1.6rem; min-height: 170px; }
-  .how-step-badge { top: -18px; }
+  .how-step-card { padding-top: 0rem; min-height: 170px; }
+  .how-step-badge { top: 37px; left:33px;}
 }
 
 .choose-card::before {
